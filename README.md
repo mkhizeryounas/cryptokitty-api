@@ -1,18 +1,17 @@
 # Cryptokitty API
 NodeJS API to generate Cute CryptoKitties Images with custom Kattributes 😉
 
-### Demo
-<a href="http://computers.pk:3010">Here</a>
-<br>
+### Demo & Base URL
+<a href="http://computers.pk:3010">http://computers.pk:3010</a>
 
-```shell
+```sh
 npm run post
 ```
 
-<b>POST<b> <tt>/kitty</tt>
+<b>POST</b> <tt>/kitty</tt>
 ```
 {
-	"cattributes" : {
+    "cattributes" : {
       "BodyType": "chartreux",
       "PatternType": "tigerpunk",
       "EyeType": "fabulous",
