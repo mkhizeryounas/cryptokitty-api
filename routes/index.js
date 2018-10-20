@@ -151,10 +151,16 @@ router.post("/kitty", async (req, res) => {
     }
 
     // Convert SVG to PNG for tmp
-    let body = await convertImage(kittyImage, hash, "body");
-    let eye = await convertImage(kittyEye, hash, "eye");
-    let mouth = await convertImage(kittyMouth, hash, "mouth");
-    let imgs = [body.data.path, eye.data.path, mouth.data.path];
+    let convData = await Promise.all([
+      convertImage(kittyImage, hash, "body"),
+      convertImage(kittyEye, hash, "eye"),
+      convertImage(kittyMouth, hash, "mouth")
+    ]);
+    let imgs = [
+      convData[0].data.path,
+      convData[1].data.path,
+      convData[2].data.path
+    ];
     // Merge images togather
     let b64 = await mergeImages(imgs, {
       Canvas: Canvas
