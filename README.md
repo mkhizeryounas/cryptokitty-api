@@ -1,5 +1,5 @@
 # Cryptokitty API
-NodeJS API to generate Cute CryptoKitties Images with custom Kattributes 😉
+NodeJS API to generate Cute CryptoKitties Images with custom Cattributes 😉
 
 How to run
 -----------
