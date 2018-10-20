@@ -1,11 +1,11 @@
 {
   "name": "cryptokitty-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "postinstall": "npm install https://github.com/mkhizeryounas/merge-images/tarball/master && mkdir resources"
+    "post": "npm install https://github.com/mkhizeryounas/merge-images/tarball/master && mkdir resources"
   },
   "dependencies": {
     "canvas": "^2.0.1",
