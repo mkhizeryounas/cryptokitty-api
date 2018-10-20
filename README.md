@@ -9,9 +9,9 @@ npm run post
 sudo chmod -R 755 resources __tmp
 ```
 
-<b>GET</b> <tt>/</tt> <small>All Cattributes</small>
+Cattributes List: <b>GET</b> <tt>/</tt>
 
-<b>POST</b> <tt>/kitty</tt>
+Create Kitty: <b>POST</b> <tt>/kitty</tt>
 ```
 {
     "cattributes" : {
