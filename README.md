@@ -8,10 +8,10 @@ NodeJS API to generate Cute CryptoKitties Images with custom Kattributes 😉
 npm run post
 sudo chmod -R 755 resources __tmp
 ```
-
-Cattributes List: <b>GET</b> <tt>/</tt>
-
-Create Kitty: <b>POST</b> <tt>/kitty</tt>
+API Endpoints
+-----------
+- Cattributes List: <b>GET</b> <tt>/</tt>
+- Create Kitty: <b>POST</b> <tt>/kitty</tt>
 ```
 {
     "cattributes" : {
