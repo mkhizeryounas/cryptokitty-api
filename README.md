@@ -5,7 +5,7 @@ NodeJS API to generate Cute CryptoKitties Images with custom Kattributes 😉
 <a href="http://computers.pk:3010">http://computers.pk:3010</a>
 
 ```bash
-npm run post
+$ npm run post
 sudo chmod -R 755 resources __tmp
 ```
 
