@@ -12,6 +12,7 @@ sudo chmod -R 755 resources __tmp
 API Endpoints
 -----------
 - Cattributes List:     <b>GET</b> <tt>/</tt>
+- Random Kitty:         <b>GET</b> <tt>/random-kitty?type=file</tt>
 - Create Kitty:         <b>POST</b> <tt>/kitty</tt>
 ```
 {
