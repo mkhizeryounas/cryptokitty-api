@@ -42,9 +42,33 @@ router.get("/resource/:img_name", async (req, res) => {
   }
 });
 
+router.get("/random-kitty", async (req, res) => {
+  try {
+    let props = {
+      BodyType: randomKey(cattributes.BodyType),
+      PatternType: randomKey(cattributes.PatternType),
+      EyeType: randomKey(cattributes.EyeType),
+      MouthType: randomKey(cattributes.MouthType),
+      Primary: randomKey(cattributes.Primary),
+      Secondary: randomKey(cattributes.Secondary),
+      Tertiary: randomKey(cattributes.Tertiary),
+      EyeColor: randomKey(cattributes.EyeColor)
+    };
+    let data = await generateKitty(props);
+    if (req.query.type == "file")
+      return res.sendFile(`${process.cwd()}/resources/${data.data.hash}.png`);
+    else return res.json(data);
+  } catch (err) {
+    console.log("Err", err);
+    res.status(400).json({
+      status: false,
+      error: err.name || "An unknown error occoured",
+      data: err.details || {}
+    });
+  }
+});
 router.post("/kitty", async (req, res) => {
   try {
-    const hash = uuid();
     const schema = joi.object().keys({
       BodyType: joi
         .string()
@@ -90,7 +114,21 @@ router.post("/kitty", async (req, res) => {
     //   EyeColor: "strawberry"
     // };
     let props = await joi.validate(req.body.cattributes, schema);
+    let data = await generateKitty(props);
+    res.json(data);
+  } catch (err) {
+    console.log("Err", err);
+    res.status(400).json({
+      status: false,
+      error: err.name || "An unknown error occoured",
+      data: err.details || {}
+    });
+  }
+});
 
+async function generateKitty(props) {
+  try {
+    const hash = uuid();
     let colors = [
       cattributes.Primary[props.Primary],
       cattributes.Secondary[props.Secondary],
@@ -173,24 +211,33 @@ router.post("/kitty", async (req, res) => {
       fs.unlink(e, () => {});
     });
     // Send the end result to the user
-    res.json({
+    return {
       status: true,
       message: "Kitty came to life!",
       data: {
         resource: `${config.base_url}/resource/${hash}.png`,
         hash: hash,
-        dna: crypto.encrypt(JSON.stringify(props))
+        dna: crypto.encrypt(JSON.stringify(props)),
+        cattributes: props
       }
-    });
+    };
   } catch (err) {
-    console.log("Err", err);
-    res.status(400).json({
-      status: false,
-      error: err.name || "An unknown error occoured",
-      data: err.details || {}
-    });
+    console.log("Kitty Generation Err", err);
+    throw err;
   }
-});
+}
+
+function randomKey(obj) {
+  let len = 0;
+  for (i in obj) len++;
+  len--;
+  let rand = Math.ceil((Math.random() * 10) % len);
+  let index = 0;
+  for (i in obj) {
+    if (index == rand) return i;
+    index++;
+  }
+}
 
 async function saveImage(base64Data, imgPath) {
   return new Promise((resolve, reject) => {
